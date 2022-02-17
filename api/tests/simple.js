@@ -1,6 +1,7 @@
-const server = require('../index');
+const server = require('../app');
 const supertest = require('supertest');
 const request = supertest(server);
+
 
 describe('test made for testing purposes :)', ()=>{
     it('GET / should show homepage',  (done) => {
@@ -14,8 +15,3 @@ describe('test made for testing purposes :)', ()=>{
             });
     });
 });
-
-afterAll((done) => {
-    server.close();
-    done();
-})

@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "set DEBUG=server & nodemon index.js",
     "prod": "node index.js",
-    "test": "cross-env NODE_ENV=test jest --testTimeout=10000",
-    "test:detect": "cross-env NODE_ENV=test jest --testTimeout=10000 --detectOpenHandles"
+    "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --runInBand",
+    "test:detect": "cross-env NODE_ENV=test jest --testTimeout=10000 --detectOpenHandles --runInBand"
   },
   "author": "Piotr P",
   "license": "ISC",
   "dependencies": {
+    "crypto-js": "^4.1.1",
     "debug": "^4.3.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.1",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
@@ -25,7 +28,12 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "coveragePathIgnorePatterns": ["/node_modules/"],
-    "testMatch": ["**/tests/*.js"]
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ],
+    "testRunner": "jest-jasmine2"
   }
 }
