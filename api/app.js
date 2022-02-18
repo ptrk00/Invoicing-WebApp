@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 const authRouter = require('./routes/authRoute');
-const userRouter = require('./routes/userRoute');
+const clientRouter = require('./routes/clientRoute');
 
 const tokenAuth = require('./auth/tokenAuth');
 
@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/auth',authRouter);
-app.use('/user',userRouter);
+app.use('/client',clientRouter);
 
 app.get('/'/*, tokenAuth*/,(req,res) => {
    res.send("Hello authenticated user!");

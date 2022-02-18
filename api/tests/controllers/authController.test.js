@@ -56,7 +56,7 @@ describe('JWT testing', ()=>{
 
         expect.assertions(2);
       //  try {
-            const res = await request.post('/users/login').send({
+            const res = await request.post('/auth/login').send({
                     username: "user",
                     password: "123"
                 }
