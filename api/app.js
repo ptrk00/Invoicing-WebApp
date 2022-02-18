@@ -2,7 +2,8 @@ require('dotenv').config({path: 'config/.env'});
 const express = require('express');
 const app = express();
 
-const userRouter = require('./routes/userRoute')
+const authRouter = require('./routes/authRoute');
+const userRouter = require('./routes/userRoute');
 
 const tokenAuth = require('./auth/tokenAuth');
 
@@ -13,7 +14,8 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 
-app.use('/users',userRouter);
+app.use('/auth',authRouter);
+app.use('/user',userRouter);
 
 app.get('/'/*, tokenAuth*/,(req,res) => {
    res.send("Hello authenticated user!");
