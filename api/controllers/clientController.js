@@ -1,6 +1,27 @@
 const User = require('../models/user');
 const Client = require('../models/client');
 
+// ensure that the client id in req belongs to user client's
+exports.authorizeClientAccess = async (req,res, next) => {
+
+    const userId = req.userId.id;
+    const clientId = req.params.id;
+
+    // check if the client to be found is in the user client's list
+    const doc = await User.findOne({
+        _id: userId,
+        clients: clientId}).exec();
+
+    // unauthorized - user can 'get' only his own clients
+    if(!doc) {
+        return res.sendStatus(401);
+    }
+    else {
+        // authorized
+        next();
+    }
+}
+
 exports.addClient = async (req,res) => {
 
     const userId = req.userId.id;
@@ -18,58 +39,52 @@ exports.addClient = async (req,res) => {
 
 exports.getClient = async(req,res) => {
 
-    const userId = req.userId.id;
     const clientId = req.params.id;
-
-    // check if the client to be found is in the user client's list
-    const doc = await User.findOne({
-        _id: userId,
-        clients: clientId}).exec();
-
-    // unauthorized - user can 'get' only his own clients
-    if(!doc) {
-        res.sendStatus(401);
-    }
-
-    // authorized - find client and send json
-    else {
+    try {
         const client = await Client.findById(clientId).exec();
         res.status(200).json(client._doc);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
     }
-
 }
 
 exports.getAllClients = async(req,res) => {
 
     const userId = req.userId.id;
 
-    // check if the client to be found is in the user client's list
-    const userDoc = await User.findById(userId).populate('clients').exec();
-
-    // unauthorized - user can 'get' only his own clients
-    if(!userDoc) {
-        res.sendStatus(401);
-    }
-
-    // authorized
-    else {
+    try {
+        const userDoc = await User.findById(userId).populate('clients').exec();
         const clients = [...userDoc._doc.clients];
         res.status(200).json(clients);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
     }
 
 }
 
-// TODO: fix
 exports.deleteClient = async(req,res) => {
 
     const clientId = req.params.id;
-
     try {
-        await Client.findByIdAndDelete(clientId);
-        res.status(200);
+        await Client.findByIdAndDelete(clientId).exec();
+        res.sendStatus(200);
     } catch(err) {
-        res.status(500).json(err);
+        console.log(err);
+        res.sendStatus(500);
     }
 
+}
 
+exports.updateClient = async (req,res) => {
+
+    const clientId = req.params.id;
+    try {
+        const updated = await Client.findByIdAndUpdate(clientId, {$set: req.body}, {returnDocument: 'after'}).exec();
+        res.status(200).json(updated);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
 }
