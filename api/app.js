@@ -4,8 +4,7 @@ const app = express();
 
 const authRouter = require('./routes/authRoute');
 const clientRouter = require('./routes/clientRoute');
-
-const tokenAuth = require('./auth/tokenAuth');
+const invoiceRouter = require('./routes/invoiceRouote');
 
 const morgan = require('morgan');
 
@@ -16,6 +15,7 @@ app.use(express.json());
 
 app.use('/auth',authRouter);
 app.use('/client',clientRouter);
+app.use('/client',invoiceRouter);
 
 app.get('/'/*, tokenAuth*/,(req,res) => {
    res.send("Hello authenticated user!");
