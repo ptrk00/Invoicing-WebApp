@@ -5,7 +5,7 @@ const Client = require('../models/client');
 exports.authorizeClientAccess = async (req,res, next) => {
 
     const userId = req.userId.id;
-    const clientId = req.params.clientId;
+    const clientId = req.params.id;
 
     // check if the client to be found is in the user client's list
     const doc = await User.findOne({
