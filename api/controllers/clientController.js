@@ -5,7 +5,7 @@ const Client = require('../models/client');
 exports.authorizeClientAccess = async (req,res, next) => {
 
     const userId = req.userId.id;
-    const clientId = req.params.id;
+    const clientId = req.params.clientId;
 
     // check if the client to be found is in the user client's list
     const doc = await User.findOne({
@@ -39,7 +39,7 @@ exports.addClient = async (req,res) => {
 
 exports.getClient = async(req,res) => {
 
-    const clientId = req.params.id;
+    const clientId = req.params.clientId;
     try {
         const client = await Client.findById(clientId).exec();
         res.status(200).json(client._doc);
@@ -66,7 +66,7 @@ exports.getAllClients = async(req,res) => {
 
 exports.deleteClient = async(req,res) => {
 
-    const clientId = req.params.id;
+    const clientId = req.params.clientId;
     try {
         await Client.findByIdAndDelete(clientId).exec();
         res.sendStatus(200);
@@ -79,7 +79,7 @@ exports.deleteClient = async(req,res) => {
 
 exports.updateClient = async (req,res) => {
 
-    const clientId = req.params.id;
+    const clientId = req.params.clientId;
     try {
         const updated = await Client.findByIdAndUpdate(clientId, {$set: req.body}, {returnDocument: 'after'}).exec();
         res.status(200).json(updated);
