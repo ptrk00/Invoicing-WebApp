@@ -2,9 +2,9 @@ require('dotenv').config({path: 'config/.env'});
 const express = require('express');
 const app = express();
 
-const authRouter = require('./routes/authRoute');
-const clientRouter = require('./routes/clientRoute');
-const invoiceRouter = require('./routes/invoiceRouote');
+const authRouter = require('./src/routes/authRoute');
+const clientRouter = require('./src/routes/clientRoute');
+const invoiceRouter = require('./src/routes/invoiceRouote');
 
 const morgan = require('morgan');
 

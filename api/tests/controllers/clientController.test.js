@@ -2,9 +2,9 @@ const server = require('../../app');
 const supertest = require('supertest');
 const request = supertest(server);
 const mongoose = require('mongoose');
-const User = require('../../models/user');
+const User = require('../../src/models/user');
 const CryptoJS = require("crypto-js");
-const Client = require('../../models/client');
+const Client = require('../../src/models/client');
 
 let loginRes = null;
 
