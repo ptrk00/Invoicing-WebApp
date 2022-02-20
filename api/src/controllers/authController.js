@@ -2,6 +2,14 @@ const User = require('../models/user');
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken')
 
+/**
+ * Registers new user.
+ *
+ * @function register
+ * @param {Object} req - Express request object
+ * @param {User} req.body - user to be registered
+ * @param {Object} res - Express response object
+ */
 exports.register = async (req,res) => {
 
     let psswd;
@@ -25,6 +33,16 @@ exports.register = async (req,res) => {
 
 }
 
+
+/**
+ * Login registered user.
+ *
+ * @function login
+ * @param {Object} req - Express request object
+ * @param {String} req.body.username - user username
+ * @param {String} req.body.password - user password
+ * @param {Object} res - Express response object
+ */
 exports.login = async (req,res) => {
 
     try {

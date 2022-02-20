@@ -7,7 +7,8 @@
     "dev": "set DEBUG=server & nodemon index.js",
     "prod": "node index.js",
     "test": "cross-env NODE_ENV=test jest --testTimeout=10000 --runInBand",
-    "test:detect": "cross-env NODE_ENV=test jest --testTimeout=10000 --detectOpenHandles --runInBand"
+    "test:detect": "cross-env NODE_ENV=test jest --testTimeout=10000 --detectOpenHandles --runInBand",
+    "doc": "jsdoc -d docs -r ./src"
   },
   "author": "Piotr P",
   "license": "ISC",
@@ -23,6 +24,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "jest": "^27.5.1",
+    "jsdoc": "^3.6.10",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
   },
