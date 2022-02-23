@@ -13,11 +13,13 @@
   "author": "Piotr P",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.6.1",
     "crypto-js": "^4.1.1",
     "debug": "^4.3.3",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
+    "jspdf": "^2.5.1",
     "mongoose": "^6.2.1",
     "morgan": "^1.10.0"
   },
