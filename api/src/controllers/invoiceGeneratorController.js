@@ -29,6 +29,7 @@ exports.preparePDF = async (req,res, next) => {
     doc.text(msg,10,10);
 
     req.invoice = doc.output();
+    req.invoiceData = invoice._doc;
     req.clientFullname = client.fullname;
     next();
 }

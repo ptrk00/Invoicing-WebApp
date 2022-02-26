@@ -1,6 +1,4 @@
 const sgMail = require('@sendgrid/mail');
-const fs = require("fs");
-const path = require("path");
 
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
@@ -13,6 +11,7 @@ exports.sendInvoice = async (req,res) => {
         from: process.env.SEND_GRID_SENDER,
         subject: "Invoice",
         text: "You have one unpaid invoice",
+        html: `<a>http://localhost:3000/payment/${req.invoiceData.id}</a>`,
         attachments : [
             {
                 content: attachment,
